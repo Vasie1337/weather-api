@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import { CalendarDaysIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface ForecastProps {
   forecast: {
@@ -36,6 +37,12 @@ function classNames(...classes: string[]) {
 
 export default function WeatherForecast({ forecast }: ForecastProps) {
   const [selectedTab, setSelectedTab] = useState(0);
+
+  const hourlyData = forecast.forecastday[0].hour.map((hour) => ({
+    time: new Date(hour.time).getHours(),
+    temp: hour.temp_c,
+    rain: hour.chance_of_rain,
+  }));
 
   return (
     <div className="bg-zinc-900/95 rounded-xl p-4 sm:p-6 border border-zinc-800">
@@ -108,40 +115,72 @@ export default function WeatherForecast({ forecast }: ForecastProps) {
             </div>
           </Tab.Panel>
 
-          {/* Hourly Forecast */}
+          {/* Hourly Forecast - replace with chart */}
           <Tab.Panel>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4">
-              {forecast.forecastday[0].hour
-                .filter((_, index) => index % 3 === 0)
-                .map((hour) => {
-                  const time = new Date(hour.time);
-                  return (
-                    <div
-                      key={hour.time}
-                      className="bg-zinc-800/50 rounded-lg p-2 sm:p-4"
-                    >
-                      <p className="text-zinc-400 text-xs sm:text-sm">
-                        {time.toLocaleTimeString('en-US', {
-                          hour: 'numeric',
-                          hour12: true,
-                        })}
-                      </p>
-                      <div className="flex items-center justify-center my-1 sm:my-2">
-                        <img
-                          src={hour.condition.icon}
-                          alt={hour.condition.text}
-                          className="w-8 h-8 sm:w-10 sm:h-10"
-                        />
-                        <span className="text-lg sm:text-xl font-bold text-white ml-2">
-                          {Math.round(hour.temp_c)}°
-                        </span>
-                      </div>
-                      <div className="text-[10px] sm:text-xs text-blue-400 text-center">
-                        {hour.chance_of_rain}% rain
-                      </div>
-                    </div>
-                  );
-                })}
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={hourlyData}>
+                  <defs>
+                    <linearGradient id="tempGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
+                    </linearGradient>
+                    <linearGradient id="rainGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
+                  <XAxis 
+                    dataKey="time" 
+                    stroke="#71717a" 
+                    tick={{ fill: '#71717a' }}
+                    tickFormatter={(hour) => `${hour}:00`}
+                  />
+                  <YAxis 
+                    yAxisId="temp"
+                    stroke="#71717a" 
+                    tick={{ fill: '#71717a' }}
+                    tickFormatter={(value) => `${value}°`}
+                  />
+                  <YAxis 
+                    yAxisId="rain"
+                    orientation="right"
+                    stroke="#71717a" 
+                    tick={{ fill: '#71717a' }}
+                    tickFormatter={(value) => `${value}%`}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#18181b',
+                      border: '1px solid #27272a',
+                      borderRadius: '0.5rem',
+                    }}
+                    labelStyle={{ color: '#71717a' }}
+                    formatter={(value: number, name: string) => [
+                      name === 'temp' ? `${value.toFixed(1)}°C` : `${value}%`,
+                      name === 'temp' ? 'Temperature' : 'Rain Chance'
+                    ]}
+                    labelFormatter={(hour) => `${hour}:00`}
+                  />
+                  <Area
+                    yAxisId="temp"
+                    type="monotone"
+                    dataKey="temp"
+                    stroke="#f59e0b"
+                    fill="url(#tempGradient)"
+                    strokeWidth={2}
+                  />
+                  <Area
+                    yAxisId="rain"
+                    type="monotone"
+                    dataKey="rain"
+                    stroke="#3b82f6"
+                    fill="url(#rainGradient)"
+                    strokeWidth={2}
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
           </Tab.Panel>
         </Tab.Panels>
