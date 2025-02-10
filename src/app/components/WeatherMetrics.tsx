@@ -32,54 +32,54 @@ export default function WeatherMetrics({ current }: WeatherMetricsProps) {
   };
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
-      <div className="bg-zinc-900/95 rounded-xl p-4 border border-zinc-800">
-        <div className="flex items-center mb-2">
-          <SunIcon className="w-5 h-5 text-yellow-400 mr-2" />
-          <span className="text-zinc-400 text-sm">UV Index</span>
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mt-4 sm:mt-6">
+      <div className="bg-zinc-900/95 rounded-xl p-3 sm:p-4 border border-zinc-800">
+        <div className="flex items-center mb-1 sm:mb-2">
+          <SunIcon className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 mr-2" />
+          <span className="text-zinc-400 text-xs sm:text-sm">UV Index</span>
         </div>
-        <div className="mt-2">
-          <span className={`text-2xl font-bold ${getUVColor(current.uv)}`}>
+        <div className="mt-1 sm:mt-2">
+          <span className={`text-xl sm:text-2xl font-bold ${getUVColor(current.uv)}`}>
             {current.uv}
           </span>
-          <span className="text-zinc-400 text-sm ml-2">
+          <span className="text-zinc-400 text-xs sm:text-sm ml-2">
             {getUVDescription(current.uv)}
           </span>
         </div>
       </div>
 
-      <div className="bg-zinc-900/95 rounded-xl p-4 border border-zinc-800">
-        <div className="flex items-center mb-2">
-          <CloudIcon className="w-5 h-5 text-blue-400 mr-2" />
-          <span className="text-zinc-400 text-sm">Cloud Cover</span>
+      <div className="bg-zinc-900/95 rounded-xl p-3 sm:p-4 border border-zinc-800">
+        <div className="flex items-center mb-1 sm:mb-2">
+          <CloudIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 mr-2" />
+          <span className="text-zinc-400 text-xs sm:text-sm">Cloud Cover</span>
         </div>
-        <div className="mt-2">
-          <span className="text-2xl font-bold text-white">{current.cloud}</span>
-          <span className="text-zinc-400 text-sm ml-2">%</span>
-        </div>
-      </div>
-
-      <div className="bg-zinc-900/95 rounded-xl p-4 border border-zinc-800">
-        <div className="flex items-center mb-2">
-          <EyeIcon className="w-5 h-5 text-emerald-400 mr-2" />
-          <span className="text-zinc-400 text-sm">Visibility</span>
-        </div>
-        <div className="mt-2">
-          <span className="text-2xl font-bold text-white">{current.vis_km}</span>
-          <span className="text-zinc-400 text-sm ml-2">km</span>
+        <div className="mt-1 sm:mt-2">
+          <span className="text-xl sm:text-2xl font-bold text-white">{current.cloud}</span>
+          <span className="text-zinc-400 text-xs sm:text-sm ml-2">%</span>
         </div>
       </div>
 
-      <div className="bg-zinc-900/95 rounded-xl p-4 border border-zinc-800">
-        <div className="flex items-center mb-2">
-          <BeakerIcon className="w-5 h-5 text-purple-400 mr-2" />
-          <span className="text-zinc-400 text-sm">Gust Speed</span>
+      <div className="bg-zinc-900/95 rounded-xl p-3 sm:p-4 border border-zinc-800">
+        <div className="flex items-center mb-1 sm:mb-2">
+          <EyeIcon className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 mr-2" />
+          <span className="text-zinc-400 text-xs sm:text-sm">Visibility</span>
         </div>
-        <div className="mt-2">
-          <span className="text-2xl font-bold text-white">
+        <div className="mt-1 sm:mt-2">
+          <span className="text-xl sm:text-2xl font-bold text-white">{current.vis_km}</span>
+          <span className="text-zinc-400 text-xs sm:text-sm ml-2">km</span>
+        </div>
+      </div>
+
+      <div className="bg-zinc-900/95 rounded-xl p-3 sm:p-4 border border-zinc-800">
+        <div className="flex items-center mb-1 sm:mb-2">
+          <BeakerIcon className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 mr-2" />
+          <span className="text-zinc-400 text-xs sm:text-sm">Gust Speed</span>
+        </div>
+        <div className="mt-1 sm:mt-2">
+          <span className="text-xl sm:text-2xl font-bold text-white">
             {current.gust_kph}
           </span>
-          <span className="text-zinc-400 text-sm ml-2">km/h</span>
+          <span className="text-zinc-400 text-xs sm:text-sm ml-2">km/h</span>
         </div>
       </div>
     </div>

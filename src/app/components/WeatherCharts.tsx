@@ -28,17 +28,17 @@ export default function WeatherCharts({ current }: WeatherChartsProps) {
   const humidityData = generateHourlyData(current.humidity, 10);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6 mt-4 sm:mt-6">
       {/* Temperature Chart */}
-      <div className="bg-zinc-900/95 rounded-xl p-6 border border-zinc-800">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold text-white">Temperature Trend</h3>
-          <div className="flex items-center text-emerald-400">
-            <ArrowTrendingUpIcon className="w-5 h-5 mr-1" />
-            <span className="text-sm">+2.3°</span>
+      <div className="bg-zinc-900/95 rounded-xl p-3 sm:p-6 border border-zinc-800">
+        <div className="flex justify-between items-center mb-3 sm:mb-4">
+          <h3 className="text-base sm:text-lg font-semibold text-white">Temperature Trend</h3>
+          <div className="flex items-center text-emerald-400 text-xs sm:text-sm">
+            <ArrowTrendingUpIcon className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />
+            <span>+2.3°</span>
           </div>
         </div>
-        <div className="h-64">
+        <div className="h-48 sm:h-64">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={tempData}>
               <defs>
@@ -79,15 +79,15 @@ export default function WeatherCharts({ current }: WeatherChartsProps) {
       </div>
 
       {/* Humidity Chart */}
-      <div className="bg-zinc-900/95 rounded-xl p-6 border border-zinc-800">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold text-white">Humidity Trend</h3>
-          <div className="flex items-center text-red-400">
-            <ArrowTrendingDownIcon className="w-5 h-5 mr-1" />
-            <span className="text-sm">-5%</span>
+      <div className="bg-zinc-900/95 rounded-xl p-3 sm:p-6 border border-zinc-800">
+        <div className="flex justify-between items-center mb-3 sm:mb-4">
+          <h3 className="text-base sm:text-lg font-semibold text-white">Humidity Trend</h3>
+          <div className="flex items-center text-red-400 text-xs sm:text-sm">
+            <ArrowTrendingDownIcon className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />
+            <span>-5%</span>
           </div>
         </div>
-        <div className="h-64">
+        <div className="h-48 sm:h-64">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={humidityData}>
               <defs>
