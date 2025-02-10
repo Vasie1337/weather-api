@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/outline';
-import { CommandIcon } from 'lucide-react';
 
 interface SearchSuggestion {
   name: string;

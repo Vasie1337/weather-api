@@ -35,7 +35,7 @@ npm install
 yarn install
 ```
 
-3. Create a `.env.local` file in the root directory and add your WeatherAPI key:
+3. Create a `.env` file in the root directory and add your WeatherAPI key:
 ```env
 WEATHER_API_KEY=your_api_key_here
 ```
@@ -62,7 +62,3 @@ This project uses the WeatherAPI for weather data. You can get an API key by sig
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
