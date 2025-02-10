@@ -6,7 +6,7 @@ const BASE_URL = 'http://api.weatherapi.com/v1';
 
 export async function getWeatherData(city: string): Promise<WeatherData> {
   const response = await fetch(
-    `${BASE_URL}/current.json?key=${API_KEY}&q=${encodeURIComponent(city)}&aqi=no`,
+    `${BASE_URL}/forecast.json?key=${API_KEY}&q=${encodeURIComponent(city)}&days=7&aqi=no`,
     { next: { revalidate: 300 } }
   );
 

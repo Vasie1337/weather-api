@@ -2,6 +2,7 @@ import { WeatherData } from '../types/weather';
 import WeatherCharts from './WeatherCharts';
 import WeatherMetrics from './WeatherMetrics';
 import { MapPinIcon, CalendarIcon, ClockIcon } from '@heroicons/react/24/outline';
+import WeatherForecast from './WeatherForecast';
 
 interface WeatherDisplayProps {
   weatherData: WeatherData;
@@ -80,6 +81,9 @@ export default function WeatherDisplay({ weatherData }: WeatherDisplayProps) {
           </div>
         </div>
       </div>
+
+      {/* Forecast */}
+      <WeatherForecast forecast={weatherData.forecast} />
 
       {/* Additional Metrics */}
       <WeatherMetrics current={current} />
